@@ -25,7 +25,7 @@ const authRoute = require('./routes/auth.js');
     });
 
     app.use(express.json());
-    app.use(cors());
+    app.use(cors('*'));
 
     // route middlewares
     app.use('/api', authRoute);

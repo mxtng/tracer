@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const Account = require('../models/account');
 const Business = require('../models/business');
@@ -38,7 +39,12 @@ router.post('/register', async (req, res) => {
       { business: newBusiness._id }
     );
 
-    return res.send({ _id: newAccount._id, email: newAccount.email });
+    const token = jwt.sign(
+      { accountId: newAccount._id },
+      process.env.JWT_SECRET
+    );
+
+    return res.send({ email: newAccount.email, token });
   } catch (err) {
     console.log(err);
   }
@@ -49,12 +55,14 @@ router.post('/signin', async (req, res) => {
 
   try {
     const account = await Account.findOne({ email });
-    if (!account) throw new Error('Invalid credentials');
+    if (!account) return res.status(400).send({ error: 'Invalid credentials' });
 
     const isMatch = await bcrypt.compare(password, account.password);
-    if (!isMatch) throw new Error('Invalid credentials');
+    if (!isMatch) return res.status(400).send({ error: 'Invalid credentials' });
 
-    return res.send({ _id: account._id, email: account.email });
+    const token = jwt.sign({ accountId: account._id }, process.env.JWT_SECRET);
+
+    return res.send({ email: account.email, token });
   } catch (err) {
     console.log(err);
   }
