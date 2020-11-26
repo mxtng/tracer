@@ -4,13 +4,14 @@
   "description": "",
   "main": "backend/index.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config backend/index.js"
+    "start": "concurrently  \"nodemon -r dotenv/config backend/index.js\" \"npm start --prefix frontend\" "
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
