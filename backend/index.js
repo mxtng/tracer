@@ -2,12 +2,15 @@
 ENV VARIABLES CONFIG LIST
 (1) process.env.MONGODB_URI
 (2) process.env.PORT
+(2) process.env.JWT_SECRET
 */
 
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+const cors = require('cors');
 const port = process.env.PORT || 5000;
+const authRoute = require('./routes/auth.js');
 
 (async () => {
   try {
@@ -18,9 +21,14 @@ const port = process.env.PORT || 5000;
     await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useFindAndModify: false,
     });
 
     app.use(express.json());
+    app.use(cors());
+
+    // route middlewares
+    app.use('/api', authRoute);
 
     app.get('/', (req, res) => {
       res.send('Hello World!');
