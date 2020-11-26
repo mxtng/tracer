@@ -8,6 +8,7 @@ import Dashboard from './pages/dashboard';
 import About from './pages/about';
 import Register from './pages/register';
 import Signin from './pages/signin';
+import Checkin from './pages/checkin';
 
 import './App.css';
 
@@ -22,6 +23,7 @@ const App = () => {
           <ProtectedRoute exact path='/dashboard' component={Dashboard} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Signin} />
+          <Route exact path='/:checkin' component={Checkin} />
         </Switch>
       </Container>
     </div>

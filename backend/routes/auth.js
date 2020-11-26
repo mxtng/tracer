@@ -40,7 +40,7 @@ router.post('/register', async (req, res) => {
     );
 
     const token = jwt.sign(
-      { accountId: newAccount._id },
+      { accountId: newAccount._id, businessId: newBusiness._id },
       process.env.JWT_SECRET
     );
 
@@ -60,7 +60,10 @@ router.post('/signin', async (req, res) => {
     const isMatch = await bcrypt.compare(password, account.password);
     if (!isMatch) return res.status(400).send({ error: 'Invalid credentials' });
 
-    const token = jwt.sign({ accountId: account._id }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+      { accountId: account._id, businessId: account.business },
+      process.env.JWT_SECRET
+    );
 
     return res.send({ _id: account._id, token });
   } catch (err) {

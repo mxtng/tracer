@@ -11,6 +11,8 @@ const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 5000;
 const authRoute = require('./routes/auth.js');
+const businessRoute = require('./routes/business.js');
+const checkInRoute = require('./routes/checkin.js');
 
 (async () => {
   try {
@@ -29,6 +31,8 @@ const authRoute = require('./routes/auth.js');
 
     // route middlewares
     app.use('/api', authRoute);
+    app.use('/api', businessRoute);
+    app.use('/api', checkInRoute);
 
     app.get('/', (req, res) => {
       res.send('Hello World!');

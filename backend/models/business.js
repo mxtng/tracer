@@ -8,6 +8,7 @@ const businessSchema = new Schema(
     name: String,
     address: String,
     contact: Number,
+    checkInLink: { type: String, default: null },
     account: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Account',
