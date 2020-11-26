@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { authLogout } from '../../actions/auth';
+
 import { NavLink } from 'react-router-dom';
 import { Container, Navbar, Nav, Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 const Navigation = () => {
+  const dispatch = useDispatch();
   const isAuth = useSelector(({ auth }) => auth.isAuth);
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
@@ -19,7 +22,9 @@ const Navigation = () => {
           </Nav>
           <Nav>
             {isAuth ? (
-              <Button className='mx-2'>Logout</Button>
+              <Button className='mx-2' onClick={() => dispatch(authLogout())}>
+                Logout
+              </Button>
             ) : (
               <Fragment>
                 <NavLink to='/register' className='mx-2'>

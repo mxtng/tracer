@@ -1,15 +1,40 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { authLogin } from '../../actions/auth';
+
+import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import Button from 'react-bootstrap/Button';
+import { Button, Alert } from 'react-bootstrap';
 
 const Signin = () => {
+  const dispatch = useDispatch();
   const isAuth = useSelector(({ auth }) => auth.isAuth);
   const { register, handleSubmit, errors } = useForm();
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const onSubmit = (form) => {
-    console.log(form);
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setErrorMsg('');
+    }, 3000);
+
+    return () => clearTimeout(timerId);
+  }, [errorMsg]);
+
+  const onSubmit = ({ email, password }) => {
+    axios
+      .post('http://localhost:5000/api/signin', {
+        email,
+        password,
+      })
+      .then((res) => {
+        dispatch(authLogin(res.data));
+      })
+      .catch((err) => {
+        setErrorMsg(err.response.data.error);
+      });
+
+    return <Redirect to='/' />;
   };
 
   if (isAuth) {
@@ -22,6 +47,7 @@ const Signin = () => {
         <div className='mb-5'>
           <h3>Sign In</h3>
           <hr />
+          {errorMsg && <Alert variant={'danger'}>{errorMsg}</Alert>}
           <div className='form-group'>
             <label htmlFor='email'>Email address</label>
             <input

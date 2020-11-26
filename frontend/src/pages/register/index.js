@@ -1,15 +1,45 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { authLogin } from '../../actions/auth';
+
+import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import Button from 'react-bootstrap/Button';
+import { Button, Alert } from 'react-bootstrap';
 
 const Register = () => {
+  const dispatch = useDispatch();
   const isAuth = useSelector(({ auth }) => auth.isAuth);
   const { register, handleSubmit, errors } = useForm();
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const onSubmit = (form) => {
-    console.log(form);
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setErrorMsg('');
+    }, 3000);
+
+    return () => clearTimeout(timerId);
+  }, [errorMsg]);
+
+  const onSubmit = ({ email, password, password2, ...businessData }) => {
+    if (password !== password2) {
+      return setErrorMsg('Passwords do not match');
+    }
+
+    axios
+      .post('http://localhost:5000/api/register', {
+        email,
+        password,
+        business: businessData,
+      })
+      .then((res) => {
+        dispatch(authLogin(res.data));
+      })
+      .catch((err) => {
+        setErrorMsg(err.response.data.error);
+      });
+
+    return <Redirect to='/' />;
   };
 
   if (isAuth) {
@@ -22,6 +52,8 @@ const Register = () => {
         <div className='mb-5'>
           <h3>Account Registration</h3>
           <hr />
+          <p>* - required field</p>
+          {errorMsg && <Alert variant={'danger'}>{errorMsg}</Alert>}
           <div className='form-group'>
             <label htmlFor='email'>Email address*</label>
             <input
@@ -106,21 +138,20 @@ const Register = () => {
             )}
           </div>
           <div className='form-group'>
-            <label htmlFor='exampleInputEmail1'>Contact Number*</label>
+            <label htmlFor='contact'>Contact Number*</label>
             <input
               className='form-control'
-              id='number'
-              name='number'
+              id='contact'
+              name='contact'
               type='number'
               ref={register({ required: true })}
             />
-            {errors.number && (
+            {errors.contact && (
               <span className='text-danger'>This field is required</span>
             )}
           </div>
         </div>
 
-        <p>* - required fields</p>
         <Button type='submit' className='px-4 py-2'>
           Register
         </Button>
