@@ -44,7 +44,7 @@ router.post('/register', async (req, res) => {
       process.env.JWT_SECRET
     );
 
-    return res.send({ email: newAccount.email, token });
+    return res.send({ _id: newAccount._id, token });
   } catch (err) {
     console.log(err);
   }
@@ -62,7 +62,7 @@ router.post('/signin', async (req, res) => {
 
     const token = jwt.sign({ accountId: account._id }, process.env.JWT_SECRET);
 
-    return res.send({ email: account.email, token });
+    return res.send({ _id: account._id, token });
   } catch (err) {
     console.log(err);
   }
