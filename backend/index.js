@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 5000;
+const auth = require('./middleware/auth');
 const authRoute = require('./routes/auth.js');
 const businessRoute = require('./routes/business.js');
 const checkInRoute = require('./routes/checkin.js');
@@ -28,6 +29,9 @@ const checkInRoute = require('./routes/checkin.js');
 
     app.use(express.json());
     app.use(cors('*'));
+
+    // auth middleware
+    app.use(auth);
 
     // route middlewares
     app.use('/api', authRoute);

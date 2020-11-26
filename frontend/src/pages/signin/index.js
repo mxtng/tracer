@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { authLogin } from '../../actions/auth';
+import api from '../../api/api';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -22,8 +22,8 @@ const Signin = () => {
   }, [errorMsg]);
 
   const onSubmit = ({ email, password }) => {
-    axios
-      .post('http://localhost:5000/api/signin', {
+    api
+      .post('/api/signin', {
         email,
         password,
       })

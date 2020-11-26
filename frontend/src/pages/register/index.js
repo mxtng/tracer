@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { authLogin } from '../../actions/auth';
+import api from '../../api/api';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -26,8 +26,8 @@ const Register = () => {
       return setErrorMsg('Passwords do not match');
     }
 
-    axios
-      .post('http://localhost:5000/api/register', {
+    api
+      .post('/api/register', {
         email,
         password,
         business: businessData,

@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../api/api';
+
 import { Button } from 'react-bootstrap';
 
 const Dashboard = () => {
   const [link, setLink] = useState('');
-  const userId = useSelector(({ auth }) => auth.currentUser._id);
-  const businessId = '5fbf93cac6eac03ce5ab263b';
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/business/${businessId}/link`)
+    api
+      .get(`/api/business/link`)
       .then(({ data }) => {
         setLink(data.checkInLink);
       })
@@ -21,11 +19,8 @@ const Dashboard = () => {
   }, []);
 
   const clickHandle = () => {
-    axios
-      .post('http://localhost:5000/api/checkin/create-new-link', {
-        businessId,
-        checkInLink: businessId.slice(0, 12) + '_checkin',
-      })
+    api
+      .post('/api/checkin/create-new-link', {})
       .then(({ data }) => {
         setLink(data.checkInLink);
       })

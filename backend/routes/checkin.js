@@ -5,7 +5,13 @@ const CheckIn = require('../models/checkin');
 const Business = require('../models/business');
 
 router.post('/checkin/create-new-link', async (req, res) => {
-  const { businessId, checkInLink } = req.body;
+  if (!req.isAuth) {
+    return res.status(403).send('Permission denied');
+  }
+
+  const { businessId } = req.userData;
+
+  const checkInLink = businessId.slice(0, 12) + '_checkin';
 
   const existingCheckInLink = await CheckIn.findOne({ business: businessId });
   if (existingCheckInLink)
