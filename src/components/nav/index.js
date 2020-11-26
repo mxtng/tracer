@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Container, Navbar, Nav, Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
-const nav = () => {
+const Navigation = () => {
+  const isAuth = useSelector(({ auth }) => auth.isAuth);
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
       <Container>
@@ -12,20 +14,22 @@ const nav = () => {
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='mr-auto'>
-            <Nav.Link>
-              <NavLink to='/about'>About</NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink to='/dashboard'>Dasboard</NavLink>
-            </Nav.Link>
+            <NavLink to='/about'>About</NavLink>
+            {isAuth ? <NavLink to='/dashboard'>Dasboard</NavLink> : ''}
           </Nav>
           <Nav>
-            <NavLink to='/register' className='mx-2'>
-              <Button>Register</Button>
-            </NavLink>
-            <NavLink to='/login'>
-              <Button>Sign In</Button>
-            </NavLink>
+            {isAuth ? (
+              <Button className='mx-2'>Logout</Button>
+            ) : (
+              <Fragment>
+                <NavLink to='/register' className='mx-2'>
+                  <Button>Register</Button>
+                </NavLink>
+                <NavLink to='/login' className='mx-2'>
+                  <Button>Sign In</Button>
+                </NavLink>
+              </Fragment>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -33,4 +37,4 @@ const nav = () => {
   );
 };
 
-export default nav;
+export default Navigation;
