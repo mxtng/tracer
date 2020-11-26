@@ -11,7 +11,7 @@ router.post('/register', async (req, res) => {
 
   try {
     const account = await Account.findOne({ email });
-    if (!account) throw new Error('Email is in use');
+    if (account) return res.status(400).send({ error: 'Email is in use' });
 
     const newAccount = new Account({
       email,
