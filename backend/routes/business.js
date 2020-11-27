@@ -12,7 +12,6 @@ router.get('/business/link', async (req, res) => {
 
   const business = await Business.findById(businessId);
   if (!business) return res.status(400).send('Business not found');
-
   return res.send({ checkInLink: business.checkInLink });
 });
 

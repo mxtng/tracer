@@ -17,7 +17,6 @@ const Navigation = () => {
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='mr-auto'>
-            <NavLink to='/about'>About</NavLink>
             {isAuth ? <NavLink to='/dashboard'>Dasboard</NavLink> : ''}
           </Nav>
           <Nav>

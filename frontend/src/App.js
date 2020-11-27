@@ -5,7 +5,6 @@ import Container from 'react-bootstrap/Container';
 import Nav from './components/nav';
 import Home from './pages/home';
 import Dashboard from './pages/dashboard';
-import About from './pages/about';
 import Register from './pages/register';
 import Signin from './pages/signin';
 import Checkin from './pages/checkin';
@@ -19,7 +18,6 @@ const App = () => {
       <Container>
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/about' component={About} />
           <ProtectedRoute exact path='/dashboard' component={Dashboard} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Signin} />
