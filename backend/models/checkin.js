@@ -18,7 +18,6 @@ const checkInSchema = new Schema(
     business: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Business',
-      required: true,
     },
     checkInLink: { type: String, required: true },
     customers: [customerSchema],
