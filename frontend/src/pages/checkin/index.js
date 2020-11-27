@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import api from '../../api/api';
 import { Card } from 'react-bootstrap';
 
-import CheckInForm from '../../components/CheckIn/CheckInForm';
+import CheckInForm from '../../components/checkin/checkInForm';
 
 const Checkin = ({ location }) => {
   const [isLoading, setIsLoading] = useState(false);

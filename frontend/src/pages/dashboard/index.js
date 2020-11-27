@@ -3,8 +3,8 @@ import api from '../../api/api';
 import withNav from '../../utils/withNav';
 import Alert from 'react-bootstrap/Alert';
 
-import CheckInDetail from '../../components/CheckIn/Admin/CheckInDetail';
-import NewCheckIn from '../../components/CheckIn/Admin/CheckInCreate';
+import CheckInDetail from '../../components/checkin/admin/checkinDetail';
+import NewCheckIn from '../../components/checkin/admin/checkinCreate';
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);

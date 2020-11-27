@@ -1,5 +1,5 @@
 import React from 'react';
-import CheckInList from '../CheckInList';
+import CheckInList from '../checkinList';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 
