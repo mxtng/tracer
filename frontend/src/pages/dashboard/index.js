@@ -1,40 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../api/api';
-import CheckInDetail from '../../components/CheckInDetail';
 import withNav from '../../utils/withNav';
+import Alert from 'react-bootstrap/Alert';
 
-import { Button, Card } from 'react-bootstrap';
+import CheckInDetail from '../../components/CheckIn/Admin/CheckInDetail';
+import NewCheckIn from '../../components/CheckIn/Admin/CheckInCreate';
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [generateLink, setGenerateLink] = useState(false);
   const [checkInDetail, setCheckInDetail] = useState(null);
+  const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
-    setIsLoading(true);
-
     api
       .get(`/api/checkin/admin`)
       .then(({ data }) => {
         setCheckInDetail(data);
         setIsLoading(false);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        setErrorMsg(err.response.data.error);
       });
   }, [generateLink]);
-
-  const clickHandle = () => {
-    api
-      .post('/api/checkin/create-new-link', {})
-      .then(({ data }) => {
-        console.log(data);
-        setGenerateLink(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   return (
     <div className='mt-4'>
@@ -43,16 +31,12 @@ const Dashboard = () => {
 
       {isLoading ? (
         'Fetching data...'
-      ) : !checkInDetail ? (
-        <Card className='text-center m-4 py-5' bg='secondary'>
-          <Card.Body>
-            <Button onClick={() => clickHandle()}>
-              Generate Check-In Link
-            </Button>
-          </Card.Body>
-        </Card>
-      ) : (
+      ) : errorMsg ? (
+        <Alert variant='danger'>{errorMsg}</Alert>
+      ) : checkInDetail ? (
         <CheckInDetail {...checkInDetail} />
+      ) : (
+        <NewCheckIn onGenerateLink={setGenerateLink} />
       )}
     </div>
   );

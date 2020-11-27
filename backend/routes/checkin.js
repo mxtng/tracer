@@ -6,7 +6,7 @@ const Business = require('../models/business');
 
 router.get('/checkin/admin', async (req, res) => {
   if (!req.isAuth) {
-    return res.status(403).send('Permission denied');
+    return res.status(403).send({ error: 'Permission denied' });
   }
 
   const { businessId } = req.userData;
@@ -29,7 +29,7 @@ router.get('/checkin/verify-link/:checkInLink', async (req, res) => {
 
 router.post('/checkin/create-new-link', async (req, res) => {
   if (!req.isAuth) {
-    return res.status(403).send('Permission denied');
+    return res.status(403).send({ error: 'Permission denied' });
   }
 
   const { businessId } = req.userData;
