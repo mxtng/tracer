@@ -56,7 +56,6 @@ router.post('/checkin/create-new-link', async (req, res) => {
 
   await newLink.save();
 
-  // return res.send({ checkInLink: newLink.checkInLink });
   return res.send('success');
 });
 
@@ -70,7 +69,7 @@ router.post('/checkin/customer-checkin', async (req, res) => {
         error: 'Check-in link not found',
       });
 
-    existingCheckInLink.customers.push(customerDetail);
+    existingCheckInLink.customers.unshift(customerDetail);
     await existingCheckInLink.save();
 
     return res.send('success');
