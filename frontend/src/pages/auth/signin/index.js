@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { authLogin } from '../../actions/auth';
-import api from '../../api/api';
-import withNav from '../../utils/withNav';
+import { authLogin } from '../../../actions/auth';
+import api from '../../../api/api';
+import withNav from '../../../utils/withNav';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -35,11 +35,11 @@ const Signin = () => {
         setErrorMsg(err.response.data.error);
       });
 
-    return <Redirect to='/' />;
+    return <Redirect to='/dashboard' />;
   };
 
   if (isAuth) {
-    return <Redirect to='/' />;
+    return <Redirect to='/dashboard' />;
   }
 
   return (
