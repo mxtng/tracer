@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../api/api';
 import CheckInDetail from '../../components/CheckInDetail';
+import withNav from '../../utils/withNav';
 
 import { Button, Card } from 'react-bootstrap';
 
@@ -57,4 +58,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default withNav(Dashboard);

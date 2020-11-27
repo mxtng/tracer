@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { authLogin } from '../../actions/auth';
 import api from '../../api/api';
+import withNav from '../../utils/withNav';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -160,4 +161,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default withNav(Register);
