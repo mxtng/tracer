@@ -3,8 +3,8 @@ import ProtectedRoute from './utils/ProtectedRoute';
 
 import Home from './pages/home';
 import Dashboard from './pages/dashboard';
-import Register from './pages/register';
-import Signin from './pages/signin';
+import Register from './pages/auth/register';
+import Signin from './pages/auth/signin';
 import Checkin from './pages/checkin';
 
 import './App.css';

@@ -6,7 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './custom.scss';
 
 ReactDOM.render(
   <React.StrictMode>

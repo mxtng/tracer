@@ -5,19 +5,29 @@ import { authLogout } from '../../actions/auth';
 import { NavLink } from 'react-router-dom';
 import { Container, Navbar, Nav, Button } from 'react-bootstrap';
 
+import './index.css';
+
 const Navigation = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector(({ auth }) => auth.isAuth);
   return (
-    <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
+    <Navbar collapseOnSelect expand='lg' bg='dark' variant='light'>
       <Container>
         <Navbar.Brand>
-          <NavLink to='/'>BRAND</NavLink>
+          <NavLink to='/'>
+            <h2>Tracer</h2>
+          </NavLink>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='mr-auto'>
-            {isAuth ? <NavLink to='/dashboard'>Dasboard</NavLink> : ''}
+            {isAuth ? (
+              <NavLink to='/dashboard' className='ml-md-4'>
+                Dasboard
+              </NavLink>
+            ) : (
+              ''
+            )}
           </Nav>
           <Nav>
             {isAuth ? (

@@ -1,0 +1,29 @@
+$theme-colors: (
+  'primary': #f0b503,
+);
+
+@import '~bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+
+  .btn {
+    font-size: 0.8rem;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    padding: 0.4rem 1.2rem;
+    color: white;
+
+    &:hover,
+    &:active {
+      background-color: #f0b503;
+      opacity: 0.85;
+      color: white;
+    }
+  }
+
+  a {
+    color: rgb(7, 7, 7);
+  }
+}

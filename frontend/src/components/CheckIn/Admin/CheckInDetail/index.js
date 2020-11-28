@@ -3,6 +3,8 @@ import CheckInList from '../checkinList';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 
+import './index.css';
+
 const CheckInDetail = (props) => {
   const { checkInLink, customers } = props;
   return (
@@ -10,7 +12,7 @@ const CheckInDetail = (props) => {
       <Card bg='warning' className='mb-4 p-2'>
         <Card.Text>
           Check-In Link:{' '}
-          <Link to={'/' + checkInLink}>
+          <Link to={'/' + checkInLink} className='link'>
             http://localhost:3000/{checkInLink}
           </Link>
         </Card.Text>
