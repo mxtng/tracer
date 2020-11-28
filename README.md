@@ -1,8 +1,8 @@
-# Tracer web app
+# Tracer Web App
 
 ![Home page](/screenshots/home_page.png)
 
-## Setup process
+## Setup Instructions
 
 1. Clone repository
 2. Create .env file in root directory
