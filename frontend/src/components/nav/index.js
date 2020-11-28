@@ -23,7 +23,7 @@ const Navigation = () => {
           <Nav className='mr-auto'>
             {isAuth ? (
               <NavLink to='/dashboard' className='ml-md-4'>
-                Dasboard
+                Dashboard
               </NavLink>
             ) : (
               ''
