@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-export default (props) => {
+const ProtectedRoute = (props) => {
   const isAuth = useSelector(({ auth }) => auth.isAuth);
 
   if (!isAuth) {
@@ -10,3 +10,5 @@ export default (props) => {
   }
   return <Route {...props} />;
 };
+
+export default ProtectedRoute;

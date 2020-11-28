@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import Nav from '../components/nav';
 import Container from 'react-bootstrap/Container';
 
-export default (Component) => (props) => {
+const withNav = (Component) => (props) => {
   return (
     <Fragment>
       <Nav />
@@ -13,3 +13,5 @@ export default (Component) => (props) => {
     </Fragment>
   );
 };
+
+export default withNav;

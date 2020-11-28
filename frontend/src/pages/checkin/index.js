@@ -24,6 +24,7 @@ const Checkin = ({ location }) => {
         setErrorMsg('Oops...something went wrong');
         setIsLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading || !linkInfo || !checkInLink) {
