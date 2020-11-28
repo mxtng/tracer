@@ -4,10 +4,8 @@
   "description": "",
   "main": "backend/index.js",
   "scripts": {
-    "backend:start": "cd backend && npm install && nodemon -r dotenv/config index.js",
-    "frontend:start": "cd frontend && npm install && npm start",
-    "start": "concurrently \"npm run backend:start\"  \"npm run frontend:start\"",
-    "dev": "concurrently  \"nodemon -r dotenv/config backend/index.js\" \"npm start --prefix frontend\" "
+    "initial": "npm install && npm install --prefix frontend",
+    "start": "concurrently  \"nodemon -r dotenv/config backend/index.js\" \"npm start --prefix frontend\""
   },
   "keywords": [],
   "author": "",
